@@ -1,0 +1,523 @@
+﻿<html>
+<!--<html xmlns="http://www.w3.org/1999/xhtml"> -->
+<head>
+	<!-- Internet 9/ExtJS 3 fix: Mimic Internet Explorer 7 -->
+	<!--<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />-->
+
+	<title>Barn Owls</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="ext-3.3.0/resources/css/ext-all.css" />
+	
+	<!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
+	
+	<script type="text/javascript" src="ext-3.3.0/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="ext-3.3.0/ext-all.js"></script>
+	<script src="flowplayer/example/flowplayer-3.2.4.min.js"></script>
+	<script type="text/javascript" src="BubblePanel.js"></script> 
+	<link rel="stylesheet" href="Barn_Owl_Trust.css" type="text/css" />
+
+	<script type="text/javascript" src="Barn_Owl_Trust_iframe.js"></script> 
+</head>
+   
+<body>	
+	<div id="info-win" class="x-hidden">
+	    <div class="x-window-header">Additional Information</div>
+	</div>
+
+	<div id="info-div" class="x-hidden">
+	</div>
+	<div id="treediv" class="x-hidden">
+	<h1>Barn Owl Videos</h1>
+	</div>
+
+	<div id="videoouterdiv" class="x-hidden">
+
+
+		<div id="introdiv">
+			<h1><!--Welcome to the Ambios Ltd test webpage for our -->Leonardo Partnership project: Pilot e-module for biodiversity monitoring</h1>
+			<h1 style="float:right; font-size:18px;">– Capturing experience from older workers</h2>
+			<br><br>
+<!--			
+			<p style="text-align:justify">This page provides a sub-titled translation in English, Hungarian and Polish for a short training video about monitoring barn owls. David Ramsden MBE, from the <a href="http://www.barnowltrust.org.uk" target="_blank">Barn Owl Trust UK</a> introduces some aspects of survey and monitoring for this protected species. David is one of the UK's top experts on barn owl ecology and conservation and having just passed his 50th year is technically an 'older worker' from the European perspective. By clicking on the menu on the left, you can jump to the relevant part of the video and also see a translation of his words under the video.</p>
+			<br>
+			<p style="border:1; text-align:justify">Through a partnership from different European locations, this project will enhance and improve the quality of European biodiversity monitoring by sharing good practice and facilitating and capturing (into new e-learning content) a cascade of learning from older experienced workers to younger workers with no vocational qualifications. European biodiversity monitoring is a cornerstone for understanding the results of attempts to redress the potential negative effects of climate change. The project addresses the current European gap in these skills as experienced by the environmental conservation sector. By involving key stakeholder organisastions from three EU member states the Partnership will share perspectives on, and produce a pilot for, e-learning content to deliver sound ecological field skills. In addition, mobility visits will benefit individual development by exchanging subject, cultural and linguistic activities.</p>
+-->
+	   <div id="buttonsdiv">
+		<center><!--<p>SUBTITLES</p>-->
+			<table><tr>
+			<td><button type="button" onClick="translate('English')" style="width:110;" id="Englishbuttonid">
+				<table border="0" width="100%">
+				<tr>
+				<td width="30%"><img src="Images/GB.png" /></td>
+				<td style="font-size:16px; font:times !important; font-family:times" width="70%">English</td>
+				</tr>
+
+				</table>
+			</button></td>
+			<td><button type="button" onClick="translate('Hungarian')" style="width:110" id="Hungarianbuttonid">
+				<table border="0" width="100%">
+				<tr>
+				<td width="30%"><img src="Images/HU.png" /></td>
+				<td style="font-size:16px; font:times !important; font-family:times" width="70%">Hungarian</td>
+				</tr>
+
+				</table>
+			</button></td>
+			<td><button type="button" onClick="translate('Polish')" style="width:110" id="Polishbuttonid">
+				<table border="0" width="100%">
+				<tr>
+				<td width="30%"><img src="Images/PO.png" /></td>
+				<td style="font-size:16px; font:times !important; font-family:times" width="70%">Polish</td>
+				</tr>
+
+				</table>
+			</button></td>
+			</tr>
+			</table>
+		</center>
+	   </div>
+
+		</div>		
+		<center>
+		<div id="videodiv" style="width:600px; height:380px">
+		</div>
+		
+		<div id="translationdiv" style="color:#ffffff; border:1px solid black; margin-top:2px; position:absolute; height: 160px; width:466px; color:#000000; padding-left:10px; padding-right:10px; float:left;">
+			
+		</div>
+
+		</center>
+	</div>
+
+<!-- Moved out of video panel, to below video so that dynamic scroll down includes video and translated text
+	<div id="translationdiv" class="x-hidden" style="color:#ffffff">
+	</div>
+-->	
+	<script>
+var CUEPOINT = -1;  // global variable with current cuepoint
+
+var b = document.getElementsByTagName("button");
+var barnOwlPlaylist  = [
+  //http://www.abcgis.co.uk/barnowls/streamer.php
+  //http://localhost/abcGIS/localhost/Barn_Owl_Trust/streamer.php/
+    {baseUrl: 'http://www.abcgis.co.uk/barnowls/streamer.php', url: "Cjhgraphics-BarnOwlsIntro684meta.flv", autoPlay: true},
+    {baseUrl: 'http://www.abcgis.co.uk/barnowls/streamer.php', url: "Cjhgraphics-FieldGuideTheBarnOwlWhereToFind412meta.flv", autoPlay: true},
+    {baseUrl: 'http://www.abcgis.co.uk/barnowls/streamer.php', url: "Cjhgraphics-FieldGuideToBarnOwlsFeeding902meta.flv", autoPlay: true},
+    {baseUrl: 'http://www.abcgis.co.uk/barnowls/streamer.php', url: "Cjhgraphics-FieldGuideToBarnOwlsFieldSigns564meta.flv", autoPlay: true},
+    {baseUrl: 'http://www.abcgis.co.uk/barnowls/streamer.php', url: "Cjhgraphics-FieldGuideToBarnOwlsOwlPellets497meta.flv", autoPlay: true},
+    {baseUrl: 'http://www.abcgis.co.uk/barnowls/streamer.php', url: "Cjhgraphics-FieldGuideToBarnOwlsProvidingAHome540meta.flv", autoPlay: true}
+  ];
+//, onCuepoint: [[4000, 8000], function() {  alert('hello');}] 
+
+var myDiv = document.getElementById("translationdiv");
+var infoDiv = document.getElementById("info-div");
+
+TextVideo1 = [
+['This is a barn owl', 'Wow! It’s such a beautiful bird.','Look at some of it\'s amazing adaptations.','It has got an incredible heart shape face. Now the facial disc actually gathers sound in the same way as your ears do.','The ears are actually just behind the eyes within the feathers, which are really hard to see.','And when it is hunting, it can actually hear the sounds of small mammals on the ground below. Which is incredible.','Its flight is very, very quiet.','Partly because the feathers are so soft, and the body is so light, it passes through the air really, really gently.','The legs are really, really long, which is an adaptation for diving into long grass and catching the small mammals which they feed on.','The eye sight is amazing as well. Barn owls are able to detect movement when there is hardly any light.','It is just such an incredible bird.','But unfortunately there are some problems with the barn owl, because of these specializations.','Adapted for hunting from the air, it has to be very light.','Barn owls can’t put on a lot of fat to help get them through the winter.','And also its feathers, which are so soft are not particularly waterproof, so a barn owl can’t hunt during the rain.','And so, the weather has an affect, food supply has an affect, and the numbers of barn owls go up and down tremendously in response to these environmental changes.','It is a sad fact the barn owls have declined tremendously, particularly since world war II.','The landscape upon which we all depend has changed tremendously.','And barn owls have declined because of a reduction in food supply because of intensive agriculture, loss of hedge rows, loss of old pasture, loss of the rough grassland with all those small mammals in it.','Unfortunately they are prone to accidental deaths.','They die from flying into things, like motor vehicles on motorways,','and a lot of barn owls starve to death because of a lack of food.','So the numbers have gone down by at least 70% since the 1930s which is something we are really trying to address.','Because of their rarity, barn owls are afforded special legal protection.','They are not only protected against being killed as are most wild birds, but they\'re also protected against disturbance whilst they are nesting.','Barn owls are also known as an indicator species.','If there are barn owls, plenty of them in the environment, then that is an indication that actually the food chain is really healthy.','There is lots of nice, rough habitat supporting lots of small mammals, supporting barn owls, and if you have that habitat of course there is so much other biodiversity which will be supported by it.','To find out more, why not explore the website?',''],
+
+['Ez a gyöngybagoly.','Micsoda gyönyöru madár.', 'Nézzük csak, milyen fantasztikus e faj alkalmazkodása!','E szív alakú arcfátyol a gyöngybaglyok jellemzoje, amely a fülkagylóhoz hasonlóan a hangokat a hallójáratba vezeti.', 'A fülnyílások valójában a szemek mögött vannak a fej két oldalán tollak takarásában, ezért nehezen láthatóak.', 'A hallása annyira kifinomult, hogy vadászat közben képes a földön motozó kisemlosöket meghallani.', 'A röpte nagyon halk.', 'Részint mivel tollai igen puhák, és a teste igen könnyu, így hangtalanul képes siklani a levegoben.', 'Lábai igen hosszúak, így alkalmazkodott a magas fuben élo kisemlosök vadászatához. ', 'A látása szintén kivételes. Szinte teljes sötétségben is képes apró mozgásokat észlelni.', 'Fantasztikus jószág! ', 'Sajnos azonban a gyöngybaglyokkal van egy kis probléma, talán éppen e magas fokú specializáció miatt. ', 'Miután röptébol vadászik, ezért testének nagyon könnyunek kell lennie.', 'A tél során nem is képesek túl sok zsírt tartalékként felhalmozni testükben. ', 'Továbbá a puha tollazat nem kimondottan vízlepergeto. Emiatt a gyöngybaglyok nem vadászhatnak esoben.', 'A gyöngybaglyok túlélésére emiatt az idojárás és a zsákmányállatok elérhetosége nagy hatással van, ami a baglyok természetes, ámbár szélsoséges számbeli ingadozásához vezethet.', 'Sajnálatos tény, hogy a gyöngybagolyállomány különösen a Második Világháború óta csökken. ', 'A táj, amelytol mi magunk is függünk, egészében megváltozott.', 'És kevesebb gyöngybagoly van a csökkent táplálékkínálat miatt, amely nagyban az intenzívvé vált mezogazdaság kedvezotlen hatásának köszönheto. Kevesebb sövényt és hosszúfüvu legelot találunk, ami az itt élo kisemlosök élohelye lenne.','Sajnos a gyöngybaglyok ki vannak téve a közúti baleseteknek is. ', 'Sok madár pusztul el minden évben autópályák mentén gázolások következtében, és nagy számban pusztulnak el a táplálékhiány miatt is. ', '', 'Így a számuk a ’30-es évekhez képest 70%-al csökkent, és ez az a csökkenés, amelyrol igazán figyelemfelkelto!', 'Sérülékenységük miatt törvényes oltalom alatt állnak.', 'Nemcsak elpusztításuk büntetendo, de maga a fészkelés megzavarása is. ', 'A gyöngybaglyok úgy is ismertek, mint indikátor – jelzo – fajok.', 'Ha boségesen találhatók gyöngybaglyok a természetben, ez azt jelzi, hogy a tápláléklánc ép. ', 'A nem túllegeltetett hosszúfüvu területek sok kisemlost tartanak el, amelyek képesek a gyöngybaglyokat is eltartani. És ha számos ilyen természetes gyepterület áll rendelkezésre, az gazdag vadvilág egész sorát képes fenntartani.', 'További információért kérjük, látogassa meg honlapunkat!',''],
+
+['To  sowa plomykówka.', 'To przepiekny  ptak.', 'Zwróc uwage  na jej  niesamowite przystosowania', 'Ma niesamowity sercowaty ksztalt  twarzy. To tak zwana szlara, który  zbiera dzwieki w taki sam sposób jak Twoje uszy.', 'Uszy sa w rzeczywistosci  tuz za oczami w piórach i trudno je zobaczyc.', 'Gdy plomykówka  poluje, moze uslyszec dzwieki malych ssaków na ziemi ponizej. To jest niesamowite.', 'Jej lot jest bardzo, bardzo cichy.', 'Czesciowo dlatego, ze pióra tej sowy sa tak miekkie, a cialo  tak lekkie, ze przecina powietrze niemal bezdzwiecznie.', 'Jej nogi sa bardzo dlugie, co jest przystosowaniem  do  chwytania w wysokiej trawie  drobnych ssaków, które sa ich glównym pozywieniem.', 'Ich wzrok jest tez niesamowity. Sowy plomykówki sa w stanie wykryc ruch, nawet w zupelnym mroku.', 'To sprawia, ze plomykówka jest wyjatkowym ptakiem.', 'Ale wysokie wyspecjalizowanie stwarza problemy dla plomykówki.', 'Aby polowac z powietrza, musi ona byc  bardzo lekka', 'Plomykówki nie moga zatem gromadzic za duzo tluszczu, który pomóglby im przetrwac  zime. To jest wyjatkowa sytuacja dla tego gatunku.', 'Jej pióra, które sa  miekkie, nie sa szczególnie wodoodporne, wiec plomykówka  nie moze polowac podczas deszczu.', 'Pogoda i dostepnosc pokarmu ma wplyw na liczebnosc plomykówek, która drastycznie sie zmienia  w odpowiedzi na zmiany srodowiskowe.', 'Szczególnie smutne jest to, ze liczebnosc  plomykówki spadla ogromnie, zwlaszcza po II wojnie swiatowej.', 'Srodowisko w którym zyjemy ogromnie sie zmienilo.', 'Liczebnosc plomykówki spadla z powodu zmniejszenia dostepnosci pokarmuz powodu intensyfikacji rolnictwa, , zaniku pastwisk i naturalnych lak z licznymi populacjami drobnych ssaków.', 'Niestety sa one tez podatne na przypadkowa smiertelnosc.', 'Gina w kolizjach z pojazdami silnikowymi na drogach i autostradach', 'Wiele plomykówek ginie z powodu braku  pokarmu. ', 'Liczebnosc tej sowy spadla od 1930 r., o co najmniej 70% na co chcielibysmy zwrócic uwage.', 'Ze wzgledu na ich rzadkosc, plomykówki objeto szczególna ochrone prawna.', 'Sa one nie tylko chronione przed zabijaniem  jako najbardziej dzikich ptaków, ale sa takze chronione przed zaklóceniami podczas gniazdowania.', 'Plomykówki sa tez  gatunkami wskaznikowymi.', 'Ich liczna obecnosc  w srodowisku swiadczy o zdrowotnosci  lancucha pokarmowego.', 'Istnieje wiele przyjaznych, odpowiednich srodowisk obfitujacych w drobne  ssaki, a tym samym sprzyjajacych plomykówkom oraz róznorodnosci biologicznej.', 'Jesli chcesz dowiedziec sie wiecej, wejdz  na strone internetowa?','']
+
+];
+
+TextVideo2 = [
+
+['So in a landscape where are we going to find Barn Owls? Well first thing perhaps is that they’re not urban birds; if you want to find Barn Owls in cities then you have to go to southern Europe.','In Britain you might find a nest in a church tower in a village but generally they’re out in the open countryside. ','So where are they? They’re not birds that you find in mountainous areas, the highlands don’t have many Barn Owls at all. Upland areas of moor land are generally quite unsuitable for Barn Owls. You’re much more likely to find them in lowland and of course we’re talking farmland.','Within the farmed environment where are they going to find their food? Well they’re not woodland birds- that’s the Tawny Owl, the ones that go ‘Twit Twoo’, they live in the woodland. Barn Owls are not woodland birds, they’re hunting over open country and we’re mainly looking at fields. ','So where’s the food? Well, the main prey for Barn Owls in Britain is the Field Vole and the best habitat for that is rough grassland. As well as finding food, Barn Owls need somewhere to roost and somewhere to nest. Roosting sites have to be somewhere that’s dry because a wet Barn Owl can’t fly silently. They need to be somewhere dry, they like to be high above the ground so they feel safe and when they’re nesting they need somewhere level like the top of a wall or a cavity where they can lay their eggs.','Traditionally of course Barn Owls as the name suggests, were in barns, they were in farm buildings where they could nest on the top of the wall, they could roost on those wooden beams that were holding up the roof but most of the old barns have gone. So where are they going to be these days? Well modern farm buildings are generally unsuitable so they might be in a really old farm building, they could be within a stack of bales or they might be in a hollow tree if its got a nice, deep, dry hollow inside. So they roost in a very very wide variety of sites. ','To find somewhere to nest they actually need something that offers them a level place where they can lay their eggs or perhaps a wide base of a cavity. But it’s got to be somewhere dry.','Within the landscape there is not only the positive things that benefit Barn Owls like food supply and great places to roost and nest, there’s also the negative factors and the big one that affects Barn Owls are major roads. So many Barn Owls die on motorways and dual carriageways. From the Barn Owl point of view the problem with motorways and dual carriageways is that there is no hedge.','The birds can fly across the road really, really low and very often the verge is rough grass where they would like to hunt and of course a bird hunting along the side of the road is sooner or later going to cross the road and the inevitable happens.','To find out more about this issue, explore the website.',''],
+
+['Nos, merre induljunk, ha gyöngybaglyokat akarunk találni? Az elso dolog talán, hogy nem városi madarak; ha gyöngybaglyokat szeretnénk találni városokban, Dél-Európába kell utaznunk.','Angliában néha fészkelnek falvak templomtornyaiban, de általában a nyílt, vidéki tájat kedvelik.','Akkor hol is vannak? Hegyvidéki környezetben legkevésbé sem találunk majd gyöngybaglyokat. A fennsíkok, csarabos hegyvidéki platók megint csak alkalmatlanok a gyöngybaglyok számára. Jó eséllyel alacsonyabb térszíneken lelhetünk rájuk, és elsosorban muvelt, emberlakta környezethez közel.','De a mezogazdasági területeken belül hol találnak eleséget? Nem erdei madarak, mint amilyen például a macskabagoly is. A gyöngybaglyok nyílt területek madarai, és elsosorban mezok, legelok fölött vadásznak.','Tehát hol is van az élelem? A gyöngybaglyok legfobb zsákmánya Nagy-Britanniában a csalitjáró pocok, amelynek a hosszúfüvu legelo az élohelye. Ha már élelmet találtak, a gyöngybaglyoknak szükségük van nappalozó- és fészkelohelyre is. A nappalozóhelynek száraznak kell lennie, mert a vizes tollú gyöngybagoly nem tud csendesen repülni. Szeretik a magas helyeket, ahol biztonságban érezhetik magukat. A tojásrakásra pedig magasan, egy fal tetején, vagy egy száraz üregben kerül sor egy vízszintes kis párkányon.','Hagyományosan a gyöngybaglyok istállókban, magtárakban költöttek, ahol a fal és tetosík találkozásánál fészkelhettek és a fa gerendákon nappalozhattak. De a régi gazdasági épületek mára eltuntek. Akkor hát hová mehetnek manapság? A modern gazdasági épületek nem alkalmasak számukra. De lehetnek egy-egy nagyon régi istállóban, egy bálarakás között, vagy egy öreg fában, ha annak nagy, mély és száraz az odva. Így sokféle helyen nappaloznak a gyöngybaglyok.','Fészkelohelyhez azonban nehezebb hozzájutni, mivel szükségük van egy vízszintes felületre, vagy egy széles üregre, ahonnan a tojások nem gurulnak szét. De ennek is száraznak kell lennie.','Az ember alkotta tájban nem csak olyan dolgok vannak, amelyek kedveznek a baglyoknak, mint a bo táplálék, alkalmas nappalozó és fészkelohelyek. Akadnak boven negatív tényezok is, melyek közül a legjelentosebb a foutak hatása. Rengeteg gyöngybagoly pusztul el foutak, autópályák mentén. A baglyok szempontjából a gond ezekkel az utakkal az, hogy legtöbbjük mellett nincs ültetett sövény.','A madarak nagyon alacsonyan repülnek keresztül az út fölött, aminek a szegélye a hosszúfüvu legelore hasonlít, ahol vadászni szoktak. Így a madarak az út mentén vadásznak, és mikor keresztülrepülnének az úton, bekövetkezik a baleset.','Minderrol többet is megtudhat a honlapunkról www.barnowltrust.co.uk',''],
+
+['W jakich srodowiskach wystepuja plomykówki? Z pewnoscia nie jest to ptak miejski; jesli chcecie znalezc plomykówke w miescie musicie udac sie na poludnie Europy.','W Wielkiej Brytanii ich gniazda mozna znalezc na wiezach wiejskich kosciolów ale generalnie plomykówki wystepuja w terenach otwartych. ','Zatem gdzie zyja plomykówki? Nie znajdziecie ich wysoko w górach, nie ma ich tez zbyt wiele na pogórzu. Wrzosowiska na wyzynach tez nie sa zbyt odpowiednie dla plomykówek. Znacznie czesciej mozna je znalezc na nizinach, szczególnie w terenach rolniczych.','Gdzie w terenach rolniczych plomykówki moga znalezc pokarm? Nie sa one ptakami lesnymi tak jak puszczyki. Poluja w otwartym krajobrazie i przeszukuja glównie pola.','Gdzie zatem jest ich pokarm? Glówna ofiara plomykówek w Wielkiej Brytanii sa norniki polne, dla których najlepszym srodowiskiem sa laki. Oprócz miejsca do polowania, plomykówki potrzebuja miejsc do schronienia i gniazdowania. Schronienia musza byc miejscami suchymi, bo przemoczone plomykówki nie sa w stanie cicho latac. Plomykówki lubia miejsca polozone wysoko nad ziemia, suche, gdzie moga czuc sie bezpiecznie. Na miejsca gniazdowania wybieraja szczyty i zaglebienia murów. ','Dawniej plomykówki czesto gniezdzily sie w starych stodolach i innych budynkach gospodarczych, na szczytach ich scian, na drewnianych belkach podtrzymujacych dachy. Takich budynków jest niestety coraz mniej. Gdzie mozemy zatem szukac plomykówek. Nowoczesne budynki gospodarskie sa generalnie nieprzydatne, szukac powinnismy zatem w starych budynkach gospodarczych, stertach bel slomy, a czasem takze w obszernych i suchych dziuplach drzew. Plomykówki chronia sie zatem w bardzo zróznicowanych miejscach. ','Do zalozenia gniazda, plomykówki potrzebuja plaskiego miejsca lub szerszego zaglebienia muru, gdzie moga zlozyc jaja. Musi byc to tez miejsce suche.','Oprócz czynników sprzyjajacych plomykówkom, takich jak obfitosc pokarmu i dostepnosc miejsc gniazdowania i schronien, sa tez w srodowisku czynniki negatywnie oddzialywujace na te ptaki. Jednym z najwazniejszych jest obecnosc dróg, szczególnie autostrad i dróg ekspresowych, na których gina plomykówki. Takie drogi nie maja zazwyczaj naturalnych barier jak szpalery drzew czy zywoploty.','Sowy moga w zwiazku z tym przelatywac nad nimi bardzo nisko, a ze obrzeza dróg granicza z lakami, gdzie poluja sowy, predzej czy pózniej ptaki przecinaja droge i nieszczescie gotowe.','Aby dowiedziec sie wiecej odwiedzcie strone internetowa.','']
+
+];
+
+TextVideo3 = [
+
+['The survival of Barn Owls and their nesting success is controlled mainly by food supply.','Food is obviously essential for all living things.','This is rough grassland. This is really thick, dense, spongy rough grass, and this is the perfect habitat for the Field Vole, which is the Barn Owl’s main prey.','Whole fields of rough grass like this one are actually really unusual because most fields are grazed by cattle or sheep.','So where else are we going to find rough grassland?','Well if we look at the East of England, those big drainage ditches, the sides are often rough grass and full of Field Voles.','In arable landscapes you might have what’s called a field margin and hopefully this will be managed as really long rough grass, and that could be a brilliant area for Barn Owls to find their food.','It would be wrong to give the impression that Barn Owls only hunt over rough grassland, ','and in fact when you go to an area where barn owls breed, sometimes you can’t see any rough grassland in the landscape.','So where else would they be finding food?','Well the boundary features between fields, hedges for example, can be home to lots of different types of mice and voles and shrews, so the Barn Owls could hunt along hedges.','They may skirt around the edge of woodland. They may hunt over areas of scrub or potentially young tree plantations,','and in some landscapes they can actually manage to survive without any optimum habitat.','The amount of food that is available to Barn Owls is always changing. It changes according to the weather, the time of year and it also changes from one year to the next, its actually quite complex.','When the weather is bad the Barn Owls may not be able to go out and hunt if it\'s very, very wet or if its windy.','When there’s snow lying on the ground there might be plenty of food living underneath the snow and the Barn Owls can’t catch them and will easily starve to death.','There’s also that change in the time of year so small mammals breed in the spring and the summer and they die in the autumn and the winter so there’s more food in the late summer, than there is in the late winter.','Actually the ways in which food supply is constantly changing is actually very complex but the key thing to understand is that food supply controls Barn Owl survival, and Barn Owl nesting success.','The amount of land that Barn Owls hunt over doesn’t stay the same.','When they’re breeding, the food they catch has to be carried back to the nest and there’s much more food around so they tend to use a small area, perhaps 1 kilometre radius.','In the winter, there\'s much less food and they don’t have to carry it back to the nest so they use a much bigger area and can easily forage up to 5 kilometres from their former nesting site.','If you want to know more, take a look around the website.',''],
+
+['A gyöngybaglyok túlélése és költési sikere elsosorban a táplálékellátottság függvénye,','hasonlóan az élolények többségéhez.','Ez a magasfüvu, suru gyep a csalitjáró pocok kedvelt élohelye, így egyszerre a gyöngybaglyok számára is ideális táplálkozóterület.','Az ilyen, nagy kiterjedésu magasfüvu rétek igen megritkultak, mivel a legtöbb legelo szarvasmarha és juhok által legeltetett, gyakran túllegeltetett.','Merre találhatunk magasfüvu, természetes gyepeket?','Nos, Kelet-Angliát tekintve az árok- és csatornapartok gyakran ilyenek, és hemzsegnek csalitjáró pocoktól.','Jó esetben a szántóföldek széleit is muveletlen, magasfüvu szegélyeknek tekinthetjük, melyek a gyöngybaglyok számára kedvezo vadászterületet jelentenek.','Helytelen lenne azonban azt sugallni, hogy a gyöngybaglyok csak ezeken a gyepterületeken vadásznak.','Elofordul ugyanis, hogy olykor nem is találunk természetes gyepeket a vizsgált gyöngybagoly-költohelyek közelében.','Akkor hol máshol lelhetnek táplálékra?','A földeket határoló táji elemek, mint pl. a sövények, általában fajgazdag élohelyek, számos kisemlosnek biztosítanak élohelyet. Így a sövények jó vadászterületek a baglyok számára is.','Sokszor látni gyöngybaglyokat, amint az erdoket és fasorokat szegélyezo, fajgazdag bokorsávok mentén vadásznak.','Ugyanakkor olykor olyan helyeken is képesek túlélni, ahol látszólag nem találunk a számukra megfelelo vadászterületet.','Az elérheto táplálék mennyisége a természetben folyamatosan változik. Az évszakok éven belüli rendszeres, az idojárás pedig évek közötti megjósolhatatlan hullámzást okoz.','A kitartó, nagy esok és az eros szél szinte lehetetlenné teszik a gyöngybaglyok vadászatát.','A téli hótakaró alatt láthatatlanná váló kisemlosöket pedig nem képesek megfogni. A tartósan kedvezotlen idojárás a gyöngybaglyok éhhalálát okozhatja rövid idon belül.','A zsákmány mennyisége az évszakokkal is  változik. A kisemlosök tavasztól nyár végéig szaporodnak, ami oszre nagy táplálékboséget eredményez a ragadozómadarak számára. A következo tavaszig a rágcsálók egyre csak fogyatkoznak.','Lényeges megértenünk, hogy az év során összetett módon változó táplálékkínálat az, amely a gyöngybaglyok túlélését és a költési sikert alapvetoen befolyásolja.','Évszaktól függ a gyöngybaglyok vadászterületének nagysága is.','A költés során, amikor nagyobb a táplálékboség és a zsákmányt vissza kell vinniük a költohelyre a fiókákhoz, a vadászterület is beszukül, kb. egy 1 km sugarú körre.','Télen kisebb a zsákmány egyedsurusége, illetve a madaraknak már nem kell a fiókákat etetniük, így akár 5 km-re is eltávolodnak korábbi fészkelo helyüktol.','További részletekért tekintse meg weboldalunkat!',''],
+
+['Przezywalnosc plomykówek i ich sukces rozrodczy sa uzaleznione od dostepnosci pokarmu. Pokarm jest oczywiscie podstawa wielu procesów zyciowych.','To jest naturalna laka. Ta szorstka, bujna i gesta trawa, stanowi idealne srodowisko dla norników, które sa glównym pozywieniem plomykówek.','Takie laki jak ta sa obecnie dosc rzadkie, gdyz wiekszosc takich obszarów to pastwiska dla bydla i owiec.','Gdzie zatem mozemy znalezc naturalne laki?','Jesli spojrzymy na Wschodnia Anglie, na te rowy melioracyjne, to ich obrzeza porosniete sa naturalna roslinnoscia trawiasta pelna norników.','Na obszarach rolniczych mozecie znalezc cos takiego jak miedze, które sa dlugimi pasami naturalnych obszarów trawiastych i moga byc doskonalym miejscem do poszukiwania pokarmu przez plomykówki.','Mogliscie odniesc bledne wrazenie, ze plomykówki poluja wylacznie na naturalnych lakach,','ale jesli pójdziecie w miejsca gdzie plomykówki sie gniezdza, to czesto nie znajdziecie tam nieuzytkowanych lak','Gdzie indziej zatem moga one znalezc pozywienie?','Dla przykladu obrzeza zywoplotów badz zarosli sródpolnych moga byc miejscem wystepowania wielu gatunków myszy, norników i ryjówek, gdzie plomykówki moga polowac.','Plomykówki moga wykorzystywac obrzeza lasów. Moga tez polowac na obszarach zakrzaczonych lub plantacjach mlodych drzew,','a w niektórych obszarach przetrwac nawet bez optymalnych srodowisk.','Dostepnosc pokarmu podlega ciaglym zmianom. Wynika to z warunków pogodowych, pory roku oraz corocznych wahan liczebnosci gryzoni. Jest to zlozony proces. ','Gdy pogoda jest zla, gdy jest mokro lub wietrznie, plomykówki nie sa w stanie polowac.','Gdy zalega pokrywa sniezna, mimo, ze moze zyc pod nia duzo gryzoni, plomykówki nie sa w stanie ich schwytac i gina z glodu.','Sezonowe zmiany w przyrodzie powoduja, ze drobne ssaki rozmnazaja sie wiosna i latem a gina jesienia i zima, co sprawia, ze pokarmu jest o wiele wiecej póznym latem niz pod koniec zimy.','W rzeczywistosci ciagle zmiany dostepnosci pokarmu to zlozony proces i kluczowe jest zrozumienie, ze kontroluje on przezywalnosc i sukces legowy plomykówek.','Wielkosc arealów lowieckich plomykówek nie jest stala.','W okresie rozrodczym, schwytany pokarm musi byc dostarczany do gniazda. W okresie tym pozywienia jest tez wiecej. Z tych wzgledów plomykówki uzytkuja zazwyczaj male arealy o promieniu mniej wiecej 1 km.','Zima, gdy pokarmu jest o wiele mniej a plomykówki nie musza go dostarczac do gniazda, uzytkuja o wiele wieksze arealy i czesto poluja ponad 5 km od miejsca gniazdowania.','Jesli chcecie sie dowiedziec wiecej, odwiedzcie strone internetowa!','']
+
+];
+
+TextVideo4 = [
+
+['Protected species can only be taken into account if you know where they are, and so field surveying for protected species is a really important skill and we’re just going to look in very simple terms at signs of Barn Owls.','Surveying for barn owls means going up ladders, you can’t do a decent survey without a ladder, some protective equipment and a really decent torch. You’re going to be going up trees: potentially dodgy and you’re going to be going into really old buildings so you need to be really careful where you’re putting your feet. If it’s a two storey old building like this, you’ve got to look at the upstairs floor from underneath to make sure that it’s safe.','As well surveys being safe they need to be legal, Barn Owls are protected against disturbance whilst they’re nesting so if you’re going out in the spring or the summer to look for Barn Owls you need to have a licence if you’re going to look for the nests.','If you confine your searches to the ground you don’t need a licence and you’re not likely to disturb them. So, what are you going to look for? Well there are mainly three things: you’re going to look for droppings, pellets and feathers.','If you do have a licence to disturb breeding Barn Owls then you could go and look for the nests, the best and safest time would be autumn/winter, you’re looking for the debris left behind from where they have nested. This is in a cavity or in the bottom of a box perhaps, where they’ve laid their eggs and produced their young and you’ve got a compacted layer of pellet debris.','Remember, Barn Owls are usually going to be in the tall buildings, in a group of buildings it will be the highest one, it might be a two storey building. So you’re going to go in at the bottom and go up and look at the top but you don’t do that until you’ve assessed the floor. Once you know it’s safe to walk around up there then you start to systematically search.','As you first see the upper storey, or you walk into a building if its single storey, if you look up and you look at the beams where the owl might have been perching, and you look for white lines or white droppings and then you look down towards the floor again you’re looking for whites splashes, droppings and then you might start to look for pellets which are black and about the size of your thumbs.','Hopefully there’ll be some feathers, now lots of different birds produce white droppings so you can’t tell what species it is from the droppings. The pellets are definitive but the feathers are as well. So always have looked for all three signs.','You’ll be able to find more information on the website.',''],
+
+['A védett fajok megóvását csak akkor tudjuk biztosítani, ha tudjuk hol vannak. Emiatt a terepi felméréshez szükséges ismeretek és technikák nagyon fontosak. Nézzük most meg a gyöngybaglyokhoz szükséges ismereteket röviden.','A gyöngybagoly felmérések során elengedhetetlen a létrahasználat, és szükségünk lesz néhány védofelszerelésre és egy jó elemlámpára is. Fákra, javarészt veszélyes fákra kell felmenni, és régi épületeket kell átvizsgálni, ahol nagyon meg kell nézni, hová is lépünk. Ha egy két-szintes épület kell átkutatni, mint amilyen ez itt, akkor eloször alulról kell az emelet padlódeszkáit megvizsgálni, hogy elég biztonságosak-e.','A kutatásnak nem csak biztonságosnak, de törvényesnek is kell lennie. Minthogy a gyöngybagoly fokozottan védett faj, így felmérésükhöz külön engedélyre van szükség.','A talajról végzett felméréshez nincs szükség engedélyre, és a zavarás sem valószínu. Tehát mit is kell keresni? Általában három dolgot: ürüléknyomot, köpeteket és tollakat.','Ha engedéllyel rendelkezünk a fészkelo gyöngybaglyok kutatására, akkor a legbiztonságosabb idozítés, ha osszel/télen megyünk fészkelési nyomokat keresni. A maradványokat egy fali üregben, vagy a láda alján lelhetjük gyakran összetömörödött köpetréteg formájában, ahol kiköltötték tojásaikat és felnevelték utódaikat.','Ne feledjük, a gyongybaglyok általában magas épületeket választanak. Egy épületegyüttesbol a legmagasabban lehetnek, ami valószínuleg egy kétszintes épület. Tehát eloször az épület alján nézünk körül, majd a felso szinten, de mindenek elott megbizonyosodunk a padló állapotáról. Ha biztonságos felmenni, akkor elkezdhetünk ott is alaposan körülnézni.','Az épület belso átvizsgálása során érdemes eloször felfelé nézni a gerendákra, hátha nappalozó bagolyra találunk. Fehér meszeléseket, fröccsenéseket kell keresnünk a falon és a gerendákon, ürülék foltokat és fekete, hüvelykujjnyi köpeteket a padlón.','Remélhetoleg néhány toll is árulkodik a baglyok jelenlétérol, mivel sok madárnak fehér színu az ürüléke, ami alapján nem tudjuk megmondani melyik fajtól származik. A köpetek egyértelmuek, de a tollak még inkább. Tehát mindig keressük mind a három nyomot.','Bovebb információ található a www.barnowltrust.co.uk honlapon.',''],
+
+['Mozemy skutecznie chronic gatunki tylko wtedy jesli wiemy gdzie one wystepuja, tak wiec inwentaryzacja terenowa chronionych gatunków jest bardzo waznym narzedziem. Przyjrzyjmy sie zatem oznakom wystepowania plomykówek.','Poszukiwanie plomykówek oznacza wspinanie sie po drabinie. Bez drabiny, sprzetu zabezpieczajacego i latarki nie da sie zrobic przyzwoitej inwentaryzacji. Bedziecie musieli wspinac sie na drzewa, wchodzic do starych budynków, musicie zatem byc bardzo uwazni, gdzie stawiacie stopy. Jesli to bedzie dwukondygnacyjny stary budynek jak ten, musicie od dolu sprawdzic podloge górnego pietra i upewnic sie, ze jest bezpieczna.','Aby inwentaryzacja byla bezpieczna musi byc legalna, gdyz plomykówki sa chronione przez ploszeniem podczas gniazdowania. Tak wiec jesli chcecie prowadzic inwentaryzacje gniazd plomykówek wiosna lub latem musicie miec stosowne pozwolenie.','Jesli ograniczycie swoje poszukiwania do poziomu ziemi to nie potrzebujecie zezwolenia i nie powinniscie ploszyc plomykówek. Za czym sie zatem rozgladac? Zasadniczo sa 3 rodzaje sladów, których powinniscie szukac: odchody, wypluwki i pióra.','Jesli macie pozwolenie na ploszenie plomykówek, mozecie poszukiwac ich gniazd a najlepszym okresem bedzie jesien i zima. Szukacie rumoszu pozostawionego w miejscach gniazdowania. W zaglebieniach muru lub na dnie skrzynek gdzie plomykówki wysiadywaly jaja i wychowywaly mlode znajdziecie zbita warstwe pokruszonych  wypluwek.','Pamietajcie, plomykówki preferuja wysokie budynki, a gdy budynków jest wiecej wybieraja najwyzszy, najczesciej z poddaszem. Jesli chcecie wejsc do srodka i przeszukac poddasze, nie róbcie tego zanim nie sprawdzicie podlogi górnej kondygnacji. Po upewnieniu sie, ze mozna po niej bezpiecznie chodzic mozecie rozpoczac dokladne poszukiwania.','Jesli przeszukujecie poddasze, albo sprawdzacie budynek bez strychu, gdzie znajdziecie belki na których sowy mogly przesiadywac, zwracajcie uwage na biale linie lub biale slady odchodów, bo pod nimi powinniscie znalezc biale plamy i odchody. Powinniscie poszukac tam wypluwek, które sa czarne, wielkosci waszego kciuka.','Mozecie tez znalezc tam pióra. Duzo róznych ptaków pozostawia biale odchody i na ich podstawie nie okreslicie gatunku. Wypluwki sa bardziej charakterystyczne, podobnie jak pióra. Tak wiec zawsze szukajcie 3 rodzajów sladów.','Wiecej informacji znajdziecie na stronie internetowej.','']
+
+];
+
+TextVideo5 = [
+
+['What is an owl pellet? Well you can see here on the table I’ve got a variety of pellets but how is a pellet formed?','The answer is that birds of prey, generally all the owls and many other birds of prey swallow things that they can’t digest. So typically a barn owl will swallow prey whole, small mammals will go down head first, they’re digested, but the hair and the bone is left in the stomach and typically after one night’s feeding there might be the hair and bone from perhaps four small mammals. The stomach forms this into a pellet which then gradually comes up and out of the beak, its regurgitated! So it is a pellet, it is not faeces.','When you find something you think is an owl pellet, just pick one up and see if it smells. If it does smell, believe me it’s not an owl pellet you need to go and wash your hands!','So you’ve found a pellet, the next thing to think about is what species of bird might have produced it. Remember all the birds of prey, all the owls, all the crow family birds, even herons and kingfishers. Loads of birds produce pellets so we need to have a closer look.','We look at the pellet and you can see that perhaps there are insect remains, little shiny dark, blue, black, brown bits on the outside. Tawny owls, little owls and kestrels, they produce pellets with insect remains on the outside. But Barn Owl pellets almost never have insect remains on the outside. So check for insects, look at the colour of the pellet. If the tawny owl, the kestrel or the little owl has eaten a lot of earthworms the pellets will tend to look brown and they’ll be quite dense, they’ll be quite heavy for their size. Barn owl pellets are never brown and almost never have insect remains.','Lets say you’ve found some barn owl pellets, you’ve got a collection of pellets in front of you, you might realise that they actually have an age range, some of look much darker and some of them are actually starting to fall apart. And with practice you can actually work out how long the barn owls have been present for by looking at the age range of the pellets. ','When you’re out looking for pellets just be aware that breeding barn owls are protected  against disturbance. They’re probably nesting quite high above the ground so as long as you’re just collecting pellets from the ground or from the floor then the chances of you disturbing breeding birds is very, very small.','Now you’re ready to analyse the pellet, this means finding out what the owls have been eating. Amazing; you’re revealing a secret. Oh look straight away there look, I can see a lower jaw from a field vole. That is a left hand side jaw, fantastic. Now some people say that you should soak the pellets for 48 hours in water and pull them apart with tweezers but personally I prefer to do them dry. Oh look, now there is another lower jaw bone and you can see that actually that is the right hand one: there’s a pair. ','The best way to find out what the owls have been eating is to find all the lower jaw bones because they’re the easiest bits to identify, and then pair up the left and right sides so you make your lower jaws into pairs and then you just count. In a pellet that big you’ll probably have the remains of four small mammals or if they’ve been eating small ones like shrews you might even have eight or nine in one pellet. ','If you want to have a go at this yourself, and it is fascinating, why not have a look at the slide show on the website?',''],
+
+['Mi a gyöngybagoly köpet? Az asztalon többféle köpetet is felsorakoztattunk. De hogyan is alakul ki maga a köpet?','A válasz abban áll, hogy általában a ragadozó madarak zsákmányainak vannak olyan részei, amiket nem tudnak megemészteni. A gyöngybaglyokra különösen jellemzo, hogy fejjel elore, egyben nyelik le a megfogott kisemlosöket. A tollat és a csontot nem tudják megemészteni, amelyek aztán a gyomorban maradnak, és általában egy sikeres éjszaka után körülbelül 4 kisemlos csontja és szore alkot egy vagy két köpetet. A gyomorban köpetté formálódott kis labdacsokat a madár felöklendezi, és a csorén keresztül távoznak. Tehát a köpet nem ürülék, ahogy a neve is mutatja.','Ha találunk valami köpethez hasonlót, felvesszük, és szaga van, akkor legjobb, ha eldobjuk, és jó alaposan kezet mosunk. Az ugyanis valószínuleg pl. róka ürülék volt.','Tehát ha találunk egy köpetet, a leginkább azt szeretnénk rögtön tudni, hogy  melyik madárfajtól származik. Ne feledjük, az összes ragadozó madár, bagolyfaj, a varjúfélék családjának minden tagja, még a gémek és a jégmadár is köpetel. Tehát a köpetet közelebbrol meg kell vizsgálnunk.','Ha a köpet vizsgálata során apró, fényes, színes rovarmaradványokat találunk, akkor a gyöngybaglyot kizárhatjuk. A macskabagoly, a kuvik és a vörös vércse köpetének külsején találunk rovarmaradványokat. A gyöngybagoly köpet külsején szinte soha nem láthatunk ilyeneket. A rovarmaradványok keresése után nézzük meg a köpet színét. Ha a macskabagoly, a kuvik vagy a vörös vércse sok földigilisztát evett, a köpet barna színu és tömör lesz, és a méretéhez képest igen nehéz. A gyöngybagolyköpetek sohasem barnák, és szinte sosincs bennük rovarmaradvány.','Tegyük fel, hogy egy jó kupacnyi gyöngybagolyköpetet találtunk. Észrevehetjük, hogy van köztük némi korkülönbség. Néhány közülük sokkal sötétebbnek tunik, egy másik részük pedig mindjárt darabokra hullik. Némi gyakorlattal ki lehet deríteni, hogy mennyi idosek a köpetek.','Amikor köpetek után kutakodunk, figyelembe kell venni, hogy a gyöngybagoly fokozottan védett faj! Általában magasan a talaj felett fészkelnek, tehát amíg csak a földrol gyujtjük a köpeteket, nagyon kicsi az esélye annak, hogy fészkelo madarakat megzavarjuk.','Most már készen állunk arra, hogy elemezzük a köpeteket, vagyis megtudjuk, mit ettek a baglyok. Elképeszto: egy titok megfejtése! Nézzük csak! Rögtön itt egy csalitjáró pocok állkapcsát látom. Ez egy baloldali állkapocs. Néhányan azt mondanák, hogy 48 órára vízben áztatva a köpeteket könnyebb szétszedni, de én inkább szárazan szeretek velük dolgozni. És itt van egy másik alsó állkapocs, és ez igazából az elozo jobb oldali párja.','A legjobb módja, hogy kitaláljuk, mit ettek a baglyok, megkeresni az összes alsó állkapcsot, mert ezek alapján legkönnyebb a fajt meghatározni. És ha összepárosítjuk oket, utána csak megszámoljuk a párokat, és megvan az egyedek leltára. Egy nagy köpetben körülbelül 4 kisemlos csontjait találhatjuk meg, de ha kisebbeket ettek, például cickányokat, akár 8-9-et is találhatunk egy köpetben.','Ha egymagad is nekivágnál, és izgalmasnak találod a témát, nézd meg a diasort a weboldalunkon www.barnowltrust.co.uk.',''],
+
+['Co to jest wypluwka? Tutaj na stole mam różne wypluwki, ale zapytacie jak one powstaja?','Otóz ptaki drapiezne, czyli sowy i inne latajace drapiezniki polykaja rzeczy których nie sa w stanie strawic. Plomykówki zazwyczaj polykaja swoje ofiary w calosci. Drobne ssaki przesuwaja sie w ich przelyku glowa w dól, nastepnie sa trawione z wyjatkiem wlosów i kosci, które pozostaja w zoladku. Po nocnym polowaniu sowa srednio moze miec w zoladku niestrawione resztki 4 gryzoni. Resztki te sa formowane w wypluwke która stopniowo przesuwa sie w góre przelyku do dzioba po czym jest zwracana! Jest to zatem wypluwka, a nie odchody.','Gdy znajdziecie cos co przypomina wypluwke sowy, wystarczy ja wziac do reki i powachac. Jesli smierdzi, to zapewniam was, ze to nie jest wypluwka i musicie isc umyc rece.','Jesli macie wypluwke, to mozecie spróbowac oznaczyc jaki ptak drapiezny ja wydalil. Pamietajcie, ze wszystkie ptaki drapiezne, wszystkie sowy, ale takze ptaki krukowate, czaple czy zimorodki wytwarzaja wypluwki, musimy im sie zatem dobrze przyjrzec.','Patrzac na wypluwke mozemy zobaczyc szczatki owadów – blyszczace, ciemne, niebieskie, brazowe fragmenty na powierzchni wypluwki. Puszczyki, mniejsze sowy i pustulki wydalaja wypluwki ze szczatkami owadów, które zjadly. Plomykówki prawie nigdy w swoich wypluwkach nie maja szczatków owadów. Poszukajcie zatem owadów i zwróccie uwage na kolor wypluwki. Jesli puszczyki, mniejsze sowy czy pustulki zjadly duzo dzdzownic, ich wypluwki sa brazowawe, zbite i dosc ciezkie jak na swoja wielkosc. Wypluwki plomykówek nigdy nie sa brazowe i nie maja szczatków owadów.','Przypuscmy, ze znalezliscie wypluwki plomykówki, macie ich cala kolekcje. Mozecie stwierdzic, ze niektóre sa swieze, inne starsze, jedne sa ciemniejsze a inne zaczynaja sie juz rozpadac. Przy odrobinie doswiadczenia na podstawie wieku wypluwek mozecie ocenic jak dlugo przebywala tu plomykówka.','Gdy bedziecie poszukiwac wypluwek uwazajcie, bo gniazdujace plomykówki sa chronione przed ploszeniem. Jako ze gniezdza sie one wysoko nad ziemia, jesli zbieracie wypluwki z ziemi lub z podlogi to ryzyko ich sploszenia jest niewielkie.','Jestescie teraz gotowi do analizy wypluwki, czyli sprawdzenia co sowa zjadla. Niesamowite, to jak odkrywanie tajemnicy. Przyjrzyjcie sie dobrze, widze zuchwe nornika. To lewa czesc zuchwy. Niektórzy powiedza, ze powinniscie namoczyc wypluwke przez 48 godzin w wodzie a nastepnie rozdzielic ja pinceta, ale osobiscie wole robic to na sucho. Spójrzcie, mam inna czesc zuchwy, tym razem prawa, mam zatem cala zuchwe.','Najlepszym sposobem na sprawdzenie co zjadla sowa jest odnalezienie w wypluwce wszystkich zuchw i policzenie ich. W wypluwkach tej wielkosci znajdziecie prawdopodobnie resztki okolo 4 drobnych gryzoni, a jesli sowa zjadla mniejsze ssaki takie jak ryjówki, to znajdziecie ich 8 lub 9.','Jesli Was to zafascynowalo i chcecie sie tego nauczyc, obejrzyjcie pokaz slajdów na stronie internetowej.','']
+
+];
+
+TextVideo6 = [
+
+['Barn Owls need food and they need places to live. Food, well, you can only create the habitat if you have the land or perhaps you influence someone else who has the land. But anyone can prove a place for Barn Owls to live, all you need to do is put up a nest box.','Erecting a box can be great fun, but actually from the Barn Owl’s point of view it’s something that they really need. The old farm buildings and the hollow trees that they traditionally occupied have largely gone from the countryside and what we have now are thousands of modern farm buildings like this. But unfortunately without a nest box it’s just not suitable.','What do the Owls need? They want somewhere to hide, they want to be high above the ground so they feel safe, and for nesting they need somewhere level where they can lay their eggs. Well, these bails will have gone by the spring and it’s such a big open shed there is simply nowhere to hide and nowhere to lay eggs.','On a typical farm there is a range of farms buildings so which one are you going to put your box in? Well you need one that is at least 3 metres high, so that’s more than 10 feet high, and if you’ve got a group of buildings, normally the highest one is the one to go for. But obviously the birds have got to be able to get in so you’ll need a small access hole for owls or possibly choosing a building with a completely open side.','Next decision: where are you going to put the box inside the building. The thing to remember is that Barn Owls are not interested in boxes, it’s the hole that is going to attract their attention. So you want to position the box high up so that it’s facing the way that the bird is most likely to fly in so it sees the hole. They’re really inquisitive; it’ll probably land and just go straight in.','You’ll notice that this nest box has the hole right at the top. The crucial thing is the depth between the bottom of the hole and the bottom of the box. A nice deep box means that it is safe for the young when they grow up and they’re not going to come out too soon and end up on the ground below.','You might have access to a machine called a cherry picker, you might have tower scaffolding, but probably you’ll want to carry your nest box up a ladder and that’s potentially quite a dangerous thing to do so you might want some training. You certainly should be very careful, make sure the ladder is tied off. Always keep the box low in relation to your body and try and position the ladder so that the box is fixed into place low in relation to you, certainly never above your head.','Be careful, you’re responsible for your own safety this is a potentially dangerous thing to do. Make sure before you take the box up that it is going to fit. Time spent in reconnaissance is seldom wasted.','You can find loads more information on the website.',''],
+
+['A gyöngybaglyoknak táplálékra és élohelyre van szükségük. A táplálkozó terület dolga a nehezebb. Csak úgy tudunk megfelelo élohelyet létrehozni, ha magunk birtokoljuk a földet, vagy ráhatásunk van egy gazdálkodóra. Költohelyet ugyanakkor bárki képes kialakítani. Csak ki kell helyezni egy költoládát.','A költoláda kihelyezés akár jó szórakozás is lehet, de a baglyok szempontjából ez egy nagyon is hasznos és szükséges tevékenység. Az öreg gazdasági épületek és odvas fák, amiket eredetileg használtak, mára nagyon megfogyatkoztak, és ami manapság rendelkezésre áll, azok ilyen modern gazdasági épületek. De sajnos költoláda nélkül alkalmatlanok.','Mi kell a baglyoknak? Egy hely, ahol el lehet rejtozni, lehetoleg magasan a talaj felett, ahol biztonságban érzik magukat, és kell egy kis hely, ahol kikölthetik a tojásokat. Ezek a hatalmas bálák eltunnek innen tavaszra, és marad egy nagy üres tér, búvóhely és fészkelohely nélkül.','Egy tipikus farmon több épület is van. De melyikbe tegyük a költoládát? Találnunk kell egyet, ami legalább 3 méter magas. Általában célszeru a legmagasabb épületet kiválasztani. De a madaraknak nyilvánvalóan be is kell oda jutniuk, tehát szükség van egy kis berepülo nyílásra, vagy egy olyan épületre, amelynek egyik oldala nyitott.','Következo lépés: hova tegyük a költoládát az épületen belül? Amit tudnunk kell, a gyöngybaglyokat nem a ládák vonzzák, hanem a nyílás az, amely felkelti érdeklodésüket. Magasra helyezzük a költoládát, és arra kell néznie, amerrol a madár berepülve látja a berepülonyílást. Nagyon kíváncsiak; valószínuleg nyílegyenesen be fognak repülni.','Látható, hogy a láda nyílása a doboz tetejéhez közel van kivágva. A nyílás elhelyezkedése a ládán dönto fontosságú. Egy mély láda biztonságot jelent a fiataloknak, így nem tudnak ido elott kiugrani, és a földre esni.','Elképzelheto, hogy a kihelyezéshez rendelkezésre áll emelogépe vagy állványzat. De a legegyszerubb, de nem a legveszélytelenebb eszköz a létra lehet. Érdemes azonban néhány praktikus tanácsot megfontolni a létrahasználattal kapcsolatban. Mindenképpen nagyon óvatosnak kell lennünk, és ki kell kötnünk a létrát. A ládát mindig a testünkhöz közel kell tartanunk, és mindig a fejünknél alacsonyabban tartsuk, miközben cipeljük fölfelé.','Óvatosnak lennünk, a saját biztonságunkért mi vagyunk a felelosek, és ez egy veszélyes munka. Mielott felhelyeznénk a ládát, bizonyosodjunk meg, hogy ülni fog. A felderítéssel töltött ido sosem veszteség.','Többet is meg lehet tudni a ládakihelyezésrol a honlapunkon www.barnowltrust.co.uk.',''],
+
+['Plomykówki potrzebuja do zycia pokarmu i schronienia. Jesli chodzi o pokarm, to jesli jest sie wlascicielem terenu mozna stworzyc dla plomykówek odpowiednie  srodowisko, albo przekonac do tego innego  posiadacza ziemi. Ale kazdy moze zapewnic plomykówce schronienia, wystarczy tylko zrobic skrzynke legowa.','Budowa takiej skrzynki moze byc ciekawym zajeciem, a dla plomykówek jest tym czego potrzebuja. Stare zabudowania i drzewa z dziuplami, które plomykówki tradycyjnie zajmowaly zniknely z krajobrazu a w ich miejsce powstaly bardziej nowoczesne budynki jak ten tutaj. Bez skrzynek legowych, te miejsca sa dla plomykówek nieprzydatne.','Czego potrzebuja sowy? Potrzebuja miejsca gdzie moga sie schronic, najlepiej wysoko nad ziemia, dzieki czemu czuja sie bezpiecznie, a do gniazdowania potrzebuja odpowiedniego miejsca do zniesienia jaj. Te bele znikna do wiosny i pozostanie duza pusta szopa bez miejsca do ukrycia czy zniesienia jaj.','W tym typowym gospodarstwie jest wiele budynków, ale gdzie umiescilibyscie skrzynke dla plomykówek? Cóz, potrzebujecie budynku o wysokosci co najmniej 3 metrów, a jesli jest grupa budynków, najlepiej wybrac najwyzszy. Aby sowy mogly dostac sie do srodka, nalezy zrobic niewielki otwór wejsciowy, najlepiej na scianie budynku, która zwrócona jest na otwarta przestrzen.','Kolejna decyzja; gdzie w budynku umiescic skrzynke. Warto pamietac, ze to co przyciaga plomykówki to nie skrzynka ale otwór wejsciowy do skrzynki. Nalezy zatem umiescic skrzynke wysoko, odwrócona w strone z której sowa moze wleciec do srodka i zobaczyc otwór. Plomykówki sa bardzo ciekawskie, wiec jest szansa, ze wejda do srodka. ','Zwróccie uwage, ze te skrzynki maja otwór na górze. Zasadnicza rzecza jest glebokosc skrzynki miedzy otworem a dnem. Prawidlowo wykonana skrzynka jest bezpieczna dla mlodych, tak ze nie sa one w stanie wyjsc z niej za wczesnie i spasc na dól.','Do zawieszenia skrzynki rzadko bedziecie mieli do dyspozycji wysiegnik czy rusztowanie, wiec bedziecie prawdopodobnie musieli wniesc skrzynke po drabinie, co moze byc niebezpieczne i wymaga przecwiczenia. Powinniscie byc bardzo ostrozni, upewnic sie, ze drabina jest dobrze oparta. Trzymajcie skrzynke nisko i starajcie sie postawic drabine tak, zeby umieszczana skrzynka byla ponizej a nie powyzej waszej glowy.','Uwazajcie, jestescie odpowiedzialni za wlasne bezpieczenstwo podczas wykonywania tej niebezpiecznej czynnosci. Zanim umiescicie skrzynke upewnijcie sie, ze bedzie pasowac. Czas wykorzystany na rekonesans rzadko jest czasem straconym.','Wiecej informacji mozecie znalezc na stronie internetowej.','']
+
+];
+
+popupTextVideo3 = [['<h2>ROUGH GRASSLAND</h2><br>A major difference between the British barn owls and the continental European ones is the diet. Barn owls in the UK mainly feed on field voles whereas in other parts of Europe the common vole is more abundant. Since the two vole species occupy different habitats this affects the foraging behaviour and conservation of barn owl populations depending where they live.','<h2>HEDGES</h2><br>Hedgerows are an essential component of the British landscape character. These linear features mark the boundaries between the fields; some of them have been standing for centuries at the same place. Many of them were built like a stone and earth bank which crown were planted with native bush and tree species. A large proportion of the British wildlife could survive thanking to these hedges as the last refuge.','Note: In Hungary there are species which are non-protected (e.g. hooded-crow), others are protected (common buzzard), and a good few of them are strictly protected. The barn owl belongs to the last category of species, which means that any scientific research and planned investigation can be carried out only with official permission. Bird ringing requires a different and strictly regulated licence, too.'],['Megjegyzés: Fontos különbség a gyöngybaglyok Brit-szigeteken és a kontinentális Európa területén élo populációi között, hogy jelentosen eltér a táplálkozási szokásuk. Nagy-Britanniában a csalitjáró pocok a leggyakoribb mezei rágcsáló, míg Európában a mezei pocok. A csalitjáró pocok inkább nedvesebb, dús vegetációval benott, magasfüvu területeket részesít elonyben, míg a mezei pocok a mezogazdasági földeken, tarlókon, szárazabb területeken is boldogul. Ez a különbség fontos eltéréseket eredményez a különbözo gyöngybagoly-populációk viselkedése, táplálkozása és természetvédelme tekintetében.','Megjegyzés: Nagy-Britannia jellegzetes tájképi elemei a sövénysorok (“hedges”). Ezeket a földterületek határainak kijelölésére ültették, némelyek több száz éve változatlan helyen állnak. Kialakításuk két szárazon rakott kofal közé tömött földdel, és az így létrejött sánc koronájába ültetett cserje- és fasorral történt. A brit élovilág számos faja ezeknek a sövénysoroknak köszönhetoen élte túl eredeti élohelyeinek elvesztését.','Megjegyzés: Magyarországon vannak nem védett fajok (pl. dolmányos varjú), védett fajok (pl. egerészölyv) és fokozottan védett fajok. A gyöngybagoly ez utóbbi csoportba tartozik. Így kutatásukhoz, tervezett vizsgálatukhoz elozetes engedélyre van szükség. A madárgyuruzéshez külön engedélyt kell beszerezni! '],['Glówna róznica miedzy plomykówkami z Wysp Brytyjskich i kontynentalnej Europy dotyczy ich diety. Plomykówki z Wysp poluja glównie na norniki polne, podczas gdy w innych czesciach Europy bardziej liczny jest nornik zwyczajny. Oba gatunki norników preferuja nieco odmienne srodowiska co wplywa na zwyczaje pokarmowe i ochrone plomykówek zaleznie od miejsca ich wystepowania. ','Zywoploty sa zasadniczym skladnikiem brytyjskiego krajobrazu. Te liniowe struktury wyznaczaja granice miedzy polami; niektóre z nich znajduja sie w tych samych miejscach od wieków.  Wiele bylo zbudowane jako kamienne lub ziemne waly, których szczyty byly obsadzane rodzimymi krzewami i drzewami. Znaczna czesc brytyjskiej fauny mogla przetrwac dzieki zywoplotom stanowiacym ich ostatnie schronienie.','']];
+
+// set the default language to English (0), Hungarian (1) or Polish (2)
+language = 0;
+var currentvideo = -1;
+var currentpopuptext = [-1,-1];
+
+function pausecomp(millis)
+ {
+ var date = new Date();
+ var curDate = null;
+
+ do { curDate = new Date(); }
+ while(curDate-date < millis);
+ }
+
+var cuepointTimesVideo1 = [14000, 17000, 20000, 22000, 30000, 35000, 42000, 44000, 51000, 58000, 65000, 67000, 73000, 76000, 79000, 86000, 94000, 100000, 103000, 114000, 117000, 120000, 124000, 131000, 135000, 142000, 146000, 152000, 164000, 170000];
+
+barnOwlPlayer = $f("videodiv", "flowplayer/flowplayer-3.2.5.swf",{
+	// this will enable pseudostreaming support 
+	plugins: { 
+		pseudo: { url: 'flowplayer/flowplayer.pseudostreaming-3.2.5.swf' } 
+	},
+	clip : {
+		// make this clip use pseudostreaming plugin with "provider" property
+		provider: 'pseudo',
+		autoplay: false,
+		url: 'splash.jpg',
+	      onBegin: function () {
+		// disable play button for this playlist item
+		this.getPlugin("play").css({opacity: 0});
+	      }
+		
+/*		url: 'videos/Cjhgraphics-BarnOwlsIntro684.flv',
+		onCuepoint: [cuepointTimesVideo1, function(clip, cuepoint) { 
+					for (var i=0; i<cuepointTimesVideo1.length; i++){
+						if (cuepointTimesVideo1[i] == cuepoint){
+							//alert(text[i]);
+							if (TextVideo1[language].length>i){
+								myDiv.innerHTML = TextVideo1[language][i];
+								//displayInfoWindow();
+								CUEPOINT = i;														
+							}
+						}
+					}
+				}]
+*/
+		//~ onCuepoint: [
+		      //~ // each integer represents milliseconds in the timeline
+		      //~ [400, 1100, 360],
+		      //~ // this function is triggered when a cuepoint is reached
+		      //~ function(clip, cuepoint) {
+			 //~ alert("cuepoint " + cuepoint);
+		      //~ }
+		//~ ];
+	},
+	onLoad: function() {			
+			//~ this.onCuepoint(cuepointTimes, function(clip, cuepoint) {
+				//~ //alert(cuepoint);
+				//~ for (var i=0; i<cuepointTimes.length; i++){
+					//~ if (cuepointTimes[i] == cuepoint && displayText==1){
+						//~ //alert(text[i]);
+						//~ myDiv.innerHTML = text[i];
+						//~ displayInfoWindow();
+						//~ CUEPOINT = i;						
+					//~ }
+				//~ }
+				//~ // put some logging information into firebug console
+				//~ //console.log("cuepoint entered", clip, cuepoint);
+			//~ });
+	}
+});
+
+	var cuepointTimesVideo1 = [14000, 17000, 20000, 22000, 30000, 35000, 42000, 44000, 51000, 58000, 65000, 67000, 73000, 76000, 79000, 86000, 94000, 100000, 103000, 114000, 117000, 120000, 124000, 131000, 135000, 142000, 146000, 152000, 164000, 170000];
+	var cuepointTimesVideo2 = [15000, 24000, 30000, 46000, 60000, 89000, 119000, 130000, 153000, 167000, 180000];
+	var cuepointTimesVideo3 = [15000, 21000, 24000, 35000, 41000, 44000, 50000, 62000, 67000, 73000, 75000, 86000, 94000, 100000, 111000, 116000, 124000, 135000, 147000, 151000, 160000, 170000, 191000]; //177000, 
+	var cuepointTimesVideo4 = [15000, 27000, 50000, 63000,77000, 97000, 115000, 136000, 150000, 161000];
+	var cuepointTimesVideo5 = [15000, 23000, 58000, 67000, 83000, 118000, 137000, 153000, 187000, 210000, 225000];
+	var cuepointTimesVideo6 = [15000, 31000, 50000, 67000, 89000, 109000, 124000, 150000, 163000, 175000];
+
+
+function playmyvideo(c,t) {
+	//barnOwlPlayer.getClip(2).update(addCuepoint([1000, 2000, 3000, 4000]));
+	//currclip = barnOwlPlayer.getClip(0);
+	//currclip.cuepoints=1000;
+	//currclip.update();
+	//barnOwlPlayer.getClip(0).addCuepoint(1000);
+	//alert(barnOwlPlayer.getClip(0).cuepoints);
+	//var clip = $f(0).getClip(0);
+
+   //alert(barnOwlPlayer.getState());
+   //alert(barnOwlPlayer.getState());
+   //alert(t);
+   //pausecomp(1000);
+  
+   //~ if (barnOwlPlayer.getState() > 1) {
+      //~ barnOwlPlayer.stop();
+    //~ };
+    myDiv.innerHTML='';
+    CUEPOINT = -1;
+    
+   scrollBottom(); 
+    
+    //~ if (c.url=='Cjhgraphics-BarnOwlsIntro684meta.flv'){
+	//~ displayText = 1;
+    //~ }
+    //~ else{
+	//~ displayText = 0;
+    //~ };
+
+    if (barnOwlPlayer.getClip(0).url == c.url){
+		// user wishes to 'jump' within current clip
+		barnOwlPlayer.seek(t);
+    } else {
+		// user has selected a new clip
+		// close additional info popup if it exists
+		if(info_win){info_win.hide();}
+		barnOwlPlayer.setClip(c).getClip(0).update();
+		// create cuepoints for the new clip
+		switch (c.url){
+			case 'Cjhgraphics-BarnOwlsIntro684meta.flv': 
+				currentvideo = 1;
+				barnOwlPlayer.getClip(0).onCuepoint(cuepointTimesVideo1, function(clip, cuepoint) { 
+					for (var i=0; i<cuepointTimesVideo1.length; i++){
+						if (cuepointTimesVideo1[i] == cuepoint){
+							//alert(text[i]);
+							if (TextVideo1[language].length>i){
+								myDiv.innerHTML = TextVideo1[language][i];
+								//displayInfoWindow();
+								CUEPOINT = i;														
+							}
+						}
+					}
+				});
+				break;
+			case 'Cjhgraphics-FieldGuideTheBarnOwlWhereToFind412meta.flv': 
+				currentvideo = 2;
+				barnOwlPlayer.getClip(0).onCuepoint(cuepointTimesVideo2, function(clip, cuepoint) { 
+					for (var i=0; i<cuepointTimesVideo2.length; i++){
+						if (cuepointTimesVideo2[i] == cuepoint){
+							//alert(text[i]);
+							if (TextVideo2[language].length>i){
+								myDiv.innerHTML = TextVideo2[language][i];
+								//displayInfoWindow();
+								CUEPOINT = i;														
+							}
+						}
+					}
+				});
+				break;
+			case 'Cjhgraphics-FieldGuideToBarnOwlsFeeding902meta.flv':
+				currentvideo = 3;
+				barnOwlPlayer.getClip(0).onCuepoint(cuepointTimesVideo3, function(clip, cuepoint) { 
+					//document.getElementById('debugtext').innerHTML = cuepoint;
+					for (var i=0; i<cuepointTimesVideo3.length; i++){
+						if (cuepointTimesVideo3[i] == cuepoint){
+							//alert(TextVideo3[language][i]);
+							//alert(i);
+							//alert(TextVideo3[language].length);
+							if (TextVideo3[language].length>i){
+								//document.getElementById('debugtext').innerHTML = cuepoint + " normal " + i;
+								//if (i==20) { alert(TextVideo3[language][19] + " " +TextVideo3[language][20]);}
+								myDiv.innerHTML = TextVideo3[language][i];
+								if(cuepoint==24000){
+									currentpopuptext = [3,0];
+									infoDiv.innerHTML = popupTextVideo3[language][0];
+									displayInfoWindow();
+								}
+								else if(cuepoint==75000){
+									currentpopuptext = [3,1];
+									infoDiv.innerHTML = popupTextVideo3[language][1];
+									displayInfoWindow();
+								}
+								else if(cuepoint==191000){
+									if(info_win){info_win.hide();}
+								}	
+								CUEPOINT = i;														
+							}
+						}
+					}
+				});
+				break;
+			case 'Cjhgraphics-FieldGuideToBarnOwlsFieldSigns564meta.flv': 
+				currentvideo = 4;
+				barnOwlPlayer.getClip(0).onCuepoint(cuepointTimesVideo4, function(clip, cuepoint) { 
+					for (var i=0; i<cuepointTimesVideo4.length; i++){
+						if (cuepointTimesVideo4[i] == cuepoint){
+							//alert(text[i]);
+							if (TextVideo4[language].length>i){
+								myDiv.innerHTML = TextVideo4[language][i];
+								if(cuepoint==50000){
+									currentpopuptext = [3,2];
+									infoDiv.innerHTML = popupTextVideo3[language][2];
+									displayInfoWindow();
+								}
+								else if(cuepoint==161000){
+									if(info_win){info_win.hide();}
+								}	
+								//displayInfoWindow();
+								CUEPOINT = i;														
+							}
+						}
+					}
+				});
+				break;
+			case 'Cjhgraphics-FieldGuideToBarnOwlsOwlPellets497meta.flv': 
+				currentvideo = 5;
+				barnOwlPlayer.getClip(0).onCuepoint(cuepointTimesVideo5, function(clip, cuepoint) { 
+					for (var i=0; i<cuepointTimesVideo5.length; i++){
+						if (cuepointTimesVideo5[i] == cuepoint){
+							//alert(text[i]);
+							if (TextVideo5[language].length>i){
+								myDiv.innerHTML = TextVideo5[language][i];
+								//displayInfoWindow();
+								CUEPOINT = i;														
+							}
+						}
+					}
+				});
+				break;
+			case 'Cjhgraphics-FieldGuideToBarnOwlsProvidingAHome540meta.flv': 
+				currentvideo = 6;
+				barnOwlPlayer.getClip(0).onCuepoint(cuepointTimesVideo6, function(clip, cuepoint) { 
+					for (var i=0; i<cuepointTimesVideo6.length; i++){
+						if (cuepointTimesVideo6[i] == cuepoint){
+							//alert(text[i]);
+							if (TextVideo6[language].length>i){
+								myDiv.innerHTML = TextVideo6[language][i];
+								//displayInfoWindow();
+								CUEPOINT = i;														
+							}
+						}
+					}
+				});
+				break;
+			default:
+				currentvideo = -1;
+		}
+		
+		barnOwlPlayer.onStart(function () {this.seek(t);} );
+		barnOwlPlayer.play();
+   }
+
+};
+
+	//~ b[0].onclick = function () {
+		//~ playmyvideo(barnOwlPlaylist[0]);
+	//~ };
+
+	//~ b[1].onclick = function () {
+		//~ playmyvideo(barnOwlPlaylist[1]);
+	//~ };
+
+
+	//Cjhgraphics-BarnOwlsIntro684.flv    
+	//Cjhgraphics-FieldGuideTheBarnOwlWhereToFind412.flv
+	//Cjhgraphics-FieldGuideToBarnOwlsFeeding902.flv
+	//Cjhgraphics-FieldGuideToBarnOwlsFieldSigns564.flv
+	//Cjhgraphics-FieldGuideToBarnOwlsOwlPellets497.flv
+	//Cjhgraphics-FieldGuideToBarnOwlsProvidingAHome540.flv     
+	//Cjhgraphics-FieldGuideToBarnOwlsReportASighting866.flv     
+	</script>
+		<div id="headingdiv" class="x-hidden">
+
+	
+	
+	<table border=0> <!-- width=60% cellspacing=0 cellpadding=0 -->
+	<tr>
+	<td><a href="http://www.ambios.net/" target="_blank"><img height=95px style="padding-right: 10px" src="Images/Logos/ambios_logo2.jpg" /></a></td>
+
+	<td><a href="http://www.barnowltrust.org.uk/" target="_blank"><img height=95px style="padding-right: 10px" src="Images/Logos/barnowltrustlogo_100.gif" /></a></td>
+	<td><a href="http://ec.europa.eu/education/lifelong-learning-programme/doc82_en.htm" target="_blank"><img height=95px style="padding-right: 10px" src="Images/Logos/LLP_Logo2.jpg" /><!--<p style="font: Arial, Tahoma, Verdana, sans-serif; color: #6A2300 !important;">This project is funded by the Leonardo Partnership programme</p>--></a></td>
+	<td><a href="http://www.gyongybagoly.hu/index.php/englishunion-jackjpg" target="_blank"><img height=95px style="padding-right: 10px" src="Images/Logos/bof_logo.gif" /></a></td>
+	<td><a href="http://www.zbs.bialowieza.pl/" target="_blank"><img src="Images/Logos/MRI_logo2.jpg" /></a></td>
+	</tr>
+	<!--
+	<tr>
+	<td rowspan=2><img height=100px style="padding-right: 10px" src="Images/Logos/ambios_logo2_small.jpg" /></td>
+	<td><img height=80px style="padding-right: 10px" src="Images/Logos/LLP_Logo.jpg" /></td>
+	<td><img src="Images/Logos/MRI_logo2.jpg" /></td>
+	<td><img height=80px style="padding-right: 10px" src="Images/Logos/barnowltrustlogo_100.gif" /></td>
+	<td><img height=80px style="padding-right: 10px" src="Images/Logos/bof_logo.gif" /></td>
+	</tr>
+	<tr><td colspan=4><p style="font: Arial, Tahoma, Verdana, sans-serif; align: center; color: #6A2300 !important;">This project is funded by the Leonardo Partnership programme</p></td></tr> -->
+	</table>
+   </div>
+   </div>
+
+   
+   <script>   
+   document.getElementById('Englishbuttonid').style.backgroundColor='#ffffbf'; 
+   
+   translate = function(country){
+	document.getElementById('Englishbuttonid').style.backgroundColor='buttonface';
+	document.getElementById('Hungarianbuttonid').style.backgroundColor='buttonface';
+	document.getElementById('Polishbuttonid').style.backgroundColor='buttonface';
+	document.getElementById(country + 'buttonid').style.backgroundColor='#ffffbf'; 
+	myDiv.innerHTML = '';
+	infoDiv.innerHTML = '';
+	switch (country){
+		case 'English': language = 0; break;
+		case 'Hungarian': language = 1; break;
+		case 'Polish': language = 2; break;
+	}
+	if (CUEPOINT>=0){
+		switch(currentvideo){
+			case 1:
+				if (TextVideo1[language].length>CUEPOINT){
+					myDiv.innerHTML = TextVideo1[language][CUEPOINT]; 
+				}
+				break;
+			case 2:
+				if (TextVideo2[language].length>CUEPOINT){
+					myDiv.innerHTML = TextVideo2[language][CUEPOINT]; 
+				}
+				break;
+			case 3:
+				if (TextVideo3[language].length>CUEPOINT){
+					myDiv.innerHTML = TextVideo3[language][CUEPOINT];
+				}
+				break;
+			case 4:
+				if (TextVideo4[language].length>CUEPOINT){
+					myDiv.innerHTML = TextVideo4[language][CUEPOINT]; 
+				}
+				break;
+			case 5:
+				if (TextVideo5[language].length>CUEPOINT){
+					myDiv.innerHTML = TextVideo5[language][CUEPOINT]; 
+				}
+				break;
+			case 6:
+				if (TextVideo6[language].length>CUEPOINT){
+					myDiv.innerHTML = TextVideo6[language][CUEPOINT]; 
+				}
+				break;
+		}
+	}	
+	if (currentpopuptext[0] > -1) {
+		// The is currently text in the additional info popup window, therefore translate to current language choice
+		switch (currentpopuptext[0]){
+			case 3:
+				infoDiv.innerHTML = popupTextVideo3[language][currentpopuptext[1]];
+		}
+	}
+   };
+   </script>
+</body>
+   
+</html>

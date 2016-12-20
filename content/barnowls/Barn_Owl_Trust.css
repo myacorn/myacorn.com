@@ -1,0 +1,176 @@
+.x-window-tc {
+    background-image: url(Images/Window/top-bottom.png);
+}
+
+.x-window-tl {
+    background-image: url(Images/Window/left-corners.png);
+}
+
+.x-window-tr {
+    background-image: url(Images/Window/right-corners.png);
+}
+
+.x-window-bc {
+    background-image: url(Images/Window/top-bottom.png);
+}
+
+.x-window-bl { /*bottom left corner image - need to change colour */
+    background-image: url(Images/Window/left-corners.png);
+}
+
+.x-window-br {
+    background-image: url(Images/Window/right-corners.png);
+}
+
+.x-window-ml {
+    background-image: url(Images/Window/left-right.png);
+}
+
+.x-window-mr {
+    background-image: url(Images/Window/left-right.png);
+}
+/*ffffbf */
+
+.x-window-proxy {
+	background: transparent;
+    border-color: transparent;
+}
+
+.x-window-tl .x-window-header {
+    color: #000000;
+	text-align: left;
+}
+
+.x-window-plain .x-window-mc {
+    border: 1px solid #ffffbf !important;
+
+}
+
+.x-window-body {
+	border-color: #ffffbf !important;
+}
+
+.x-panel-header {
+	border-color: #ffffff;
+	background:transparent;
+	border-bottom-width:0px;
+	border-top-width:0px;
+	border-left-width:0px;
+	border-right-width:0px;
+	line-height: 0;
+	padding: 0px;
+}
+
+.x-tool-collapse-west {
+	background: transparent;
+	height: 0px;
+}
+
+.x-tree-node-leaf .x-tree-node-icon {
+/*	width: 1px;*/
+	background-image: url(Images/Fastforward_16.png) !important; /* Images/elbow.gif  s.gif*/
+}
+
+.x-tree-node .x-tree-selected {
+background-color: #ffffbf !important;
+}
+
+.x-tree-node .x-tree-node-over {
+background-color: #ffffbf !important;
+}
+
+.x-tree-node-icon {
+	background-image: url(Images/Play5.png) !important; /* Images/elbow.gif */
+}
+
+.x-tree-node-anchor span {
+	font-size: 12px;
+	color: #6A2300 !important;
+}
+
+h1 {
+	color: #F90;
+	font-size: 150%;
+	font-family: Arial, Tahoma, Verdana, sans-serif;
+	font-weight: lighter;
+	margin-bottom: 5px;
+}
+
+.x-panel-body {
+	border-color: #FFDDAA !important;
+}
+
+#centerpanel .x-panel-body {
+	border-top: #ffffff !important;
+	border-bottom: #ffffff !important;
+	background: #ffffbf;
+}
+#translationpanelid .x-panel-body {
+	border-top: #ffffff !important;
+	background: #ffffbf;
+}
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------- BUBBLE PANEL */
+.x-bubble-ml {
+    padding-left:4px;
+	background:transparent url(Images/bubble-lr.gif) repeat-y 0 0;
+	zoom:1;
+}
+
+.x-bubble-mr {
+    padding-right:4px;
+	background:transparent url(Images/bubble-lr.gif) repeat-y right 0;
+	zoom:1;
+}
+.x-bubble-mc {
+	background:#fff;
+	overflow:hidden;
+}
+
+.x-bubble-tl {
+    
+    background: #6A2300 url(Images/bubble-cs.gif) no-repeat 0 0;
+    padding-left:11px;
+    zoom:1;
+}
+.x-bubble-tr {
+    background: transparent url(Images/bubble-cs.gif) no-repeat right top;
+    padding-right:11px;
+    zoom:1;
+}
+.x-bubble-tc {
+    height: 9px;
+    overflow: hidden;
+    padding-top: 4px;
+    background: #6A2300 url(Images/bubble-tb.gif) repeat-x 0 0;
+}
+
+.x-bubble-bl {
+	background: #6A2300 url(Images/bubble-cs.gif) no-repeat 0 bottom;
+	padding-left:11px;
+    zoom:1;
+}
+.x-bubble-br {
+	background: transparent url(Images/bubble-cs.gif) no-repeat right bottom;
+	padding-right:11px;
+    zoom:1;
+}
+.x-bubble-bc {
+	height:11px;
+	font-size:1px;
+	line-height:1px;
+	overflow:hidden;
+	background: #6A2300 url(Images/bubble-tb.gif) repeat-x 0 bottom;
+}
+.x-bubble-bwrap {	
+	background: #6A2300f url(Images/bubble-tb.gif) repeat-x 0 0;
+	overflow:hidden;
+	zoom:1;
+
+}
+#translationpanelid .x-bubble-body {
+	background: #6A2300; /*Background for text part of panel (not top and bottom)*/
+	padding: 0px 8px !important;	
+	overflow:hidden;
+}

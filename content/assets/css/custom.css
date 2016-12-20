@@ -1,0 +1,195 @@
+/* Add here all your css styles (customizations) */
+
+/*font-awesome:
+fa-bug \f188
+fa-leaf \f06c 
+fa-pagelines \f18c
+fa-paw \f1b0
+
+#fff - White
+#954415 - Orangey brown
+#663300 - Dark brown
+#006600 - Dark green
+*/
+
+.navbar-brand {
+	font-size: 42px !important;
+	font-weight: 200 !important;
+	font-family: 'Berkshire Swash', Helvetica, sans-serif;
+/*	font-family: 'Oleo Script', Helvetica, sans-serif;*/
+	line-height: 25px;
+	color: #fff !important; /*top Acorn*/
+}
+
+.navbar-brand span {
+	color: #954415 !important; /*top my*/
+}
+
+.top-nav-collapse .navbar-brand {
+	color: #006600 !important; /*bottom Acorn*/
+}
+
+.top-nav-collapse .navbar-brand span{
+	color: #663300 !important; /*bottom my*/
+}
+
+.rs-caption-1:after,
+.rs-caption-1:before {
+  font-size: 22px;
+  content: url(../img/custom/acorn_small.png);  
+  /*position: absolute; */
+  padding-top: 0px !important;;
+  font-family: FontAwesome;
+}
+
+
+.about-section .about-image {
+	padding-top: 50px;
+}
+
+
+
+.img-responsive  {
+    display: block;
+    max-width: 100%;
+	padding-top: 0px;
+}
+
+.img-responsive-hje {
+    display: block;
+    max-width: 100%;
+	padding-top: 50px;
+}
+
+.about-me h2 {
+    margin: 0px;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.about-me span {
+    color: #999;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/*Info Blocks*/
+.info-blocks {
+	margin-bottom: 15px;
+}
+
+.info-blocks:hover i.icon-info-blocks {
+	color: #72c02c;
+    -webkit-transition:all 0.2s ease-in-out;
+    -moz-transition:all 0.2s ease-in-out;
+    -o-transition:all 0.2s ease-in-out;
+    transition:all 0.2s ease-in-out;	
+}
+
+.info-blocks i.icon-info-blocks {
+	float: left;
+	color: #777;
+	font-size: 30px;
+	min-width: 50px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+.info-blocks .info-blocks-in {
+	padding: 0 10px;
+	overflow: hidden;
+}
+
+.info-blocks .info-blocks-in h3 {
+	color: #555;
+	font-size: 20px;
+	line-height: 28px;
+}
+
+.info-blocks .info-blocks-in p {
+	font-size: 12px;
+}
+
+/*Parallax Quote*/
+.parallax-quote {
+  color: #fff;
+  padding: 100px 0;
+  position: relative;
+  text-align: center;
+  background: url(../img/custom/barn_owl_narrow.jpg);  
+}
+
+/* Winter tones e6e2eb b4bacf 5d5d73 423836 b5a294 ede1d5          40362b*/
+/*.services-section {
+    background: #555;
+}
+.services-section .title-v1 p,
+.services-section .title-v1 h2 {
+  color: #fff;
+}
+.services-section .title-v1 h2:after {
+  width: 70px;
+  height: 1px; 
+  content: " ";
+  margin-left: -35px;
+   margin-right: 35px;
+  position: absolute;
+  background: #ede1d5;
+}
+.services-section .service-box-v1 .service-block{
+    background: #555;
+}
+.services-section  .service-block h2{
+  color: #fff;
+}
+.services-section .service-box-v1 p {
+  color: #fff;
+}
+.services-section .service-box-v1 li {
+  color: #fff;
+}*/
+
+.clients-section {
+  padding: 60px 0;
+  position: relative;
+  background: #fff;
+}
+
+.clients-section:after {
+  background: #fff;
+}
+
+.clients-section:before {
+  background: #fff;
+}
+
+.clients-section .title-v1 p,
+.clients-section .title-v1 h2 {
+  color: #000;
+}
+
+.clients-section img{
+	width: 150px;
+	height: 150px;
+}
+
+/*Updates footer-v 7.css Background should ideally be 1600 * 1067 pixels */
+.contacts-section {
+  color: #fff;
+  position: relative;
+  background: #333 url(../img/custom/pond_background.jpg) center fixed;
+}
+
+/*Custom Sky Forms (Advanced Contacts Page)*/
+.sky-changes-3.sky-form,
+.sky-changes-3.sky-form footer {
+  border: none; 
+}
+
+.sky-changes-3.sky-form footer,
+.sky-changes-3.sky-form fieldset {
+	padding: 0;
+	background: none;
+}
+
